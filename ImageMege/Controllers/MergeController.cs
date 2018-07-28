@@ -35,9 +35,7 @@ namespace ImageMege.Controllers
 
             var mergedAlbumCollection = _imageMerger.Merge(image, album).ToList();
 
-            var result = Pager.Page(mergedAlbumCollection, pageNumber, numberOfObjectsPerPage).ToList();
-
-            return result;
+            return Pager.Page(mergedAlbumCollection, pageNumber, numberOfObjectsPerPage).ToList();
         }
 
     }
