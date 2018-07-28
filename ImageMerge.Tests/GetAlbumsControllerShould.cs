@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using ImageMege;
-using ImageMege.Controllers;
-using ImageMege.Models;
-using Moq;
+﻿using ImageMege.Controllers;
 using NUnit.Framework;
 using Shouldly;
 
