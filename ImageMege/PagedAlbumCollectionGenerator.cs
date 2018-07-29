@@ -15,12 +15,12 @@ namespace ImageMege
         private readonly ImageRepo _imageRepo;
         private readonly WebClient _webClient;
 
-        public PagedAlbumCollectionGenerator(IImageMerger imageMerger)
+        public PagedAlbumCollectionGenerator(IImageMerger imageMerger, IImageRepo imageRepo)
         {
             _dataDownloader = new DataDownloader();
             _imageMerger = imageMerger;
             _webClient = new WebClient();
-            _imageRepo = new ImageRepo();
+            _imageRepo = imageRepo;
         }
 
         public List<Album> Generate(int pageNumber, int numberOfObjectsPerPage)
@@ -47,5 +47,10 @@ namespace ImageMege
                 };
 
         }
+    }
+
+    public interface IImageRepo
+    {
+        IEnumerable<T> Consume<T>(string data);
     }
 }

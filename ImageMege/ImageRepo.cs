@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace ImageMege
 {
-    public class ImageRepo
+    public class ImageRepo : IImageRepo
     {
         public IEnumerable<T> Consume<T>(string data)
         {

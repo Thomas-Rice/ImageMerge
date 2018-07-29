@@ -13,6 +13,7 @@ namespace ImageMege
             var container = new UnityContainer();
             container.RegisterType<IPagedAlbumCollectionGenerator, PagedAlbumCollectionGenerator>(new HierarchicalLifetimeManager());
             container.RegisterType<IImageMerger, ImageMerger>(new HierarchicalLifetimeManager());
+            container.RegisterType<IImageRepo, ImageRepo>(new HierarchicalLifetimeManager());
             config.DependencyResolver = new UnityResolver(container);
 
 
