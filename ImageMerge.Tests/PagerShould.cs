@@ -37,7 +37,7 @@ namespace ImageMerge.Tests
         [TestCase(5,2,5,9)]
         [TestCase(5,3,10,14)]
         [TestCase(15,2,15,29)]
-        public void ReturnASpecifiedNumberOfResultsAccoringToPageNumber(int numberOfResultsPerPage, int pageNumber, int startingNumber, int endingNumber)
+        public void ReturnTheCorrectPhotoIdsAccoringToPageNumber(int numberOfResultsPerPage, int pageNumber, int startingNumber, int endingNumber)
         {
             var result = Pager.Page(_testCollection, pageNumber, numberOfResultsPerPage).ToList();
 
@@ -53,9 +53,5 @@ namespace ImageMerge.Tests
             result.FirstOrDefault()?.PhotoId.ShouldBe(startingNumber);
             result.Last().PhotoId.ShouldBe(endingNumber);
         }
-
-
-
-
     }
 }

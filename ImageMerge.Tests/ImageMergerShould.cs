@@ -162,6 +162,5 @@ namespace ImageMerge.Tests
             result.Count.ShouldBe(0);
         }
 
-
     }
 }
