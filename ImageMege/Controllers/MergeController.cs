@@ -1,20 +1,17 @@
 ﻿using System.Net;
 using System.Web.Http;
 using Swashbuckle.Swagger.Annotations;
-using Unity;
 
 namespace ImageMege.Controllers
 {
     public class MergeController : ApiController
     {
         private readonly IPagedAlbumCollectionGenerator _pagedAlbumCollectionGenerator;
-        private readonly UnityContainer _container;
 
         public MergeController(IPagedAlbumCollectionGenerator pagedAlbumCollectionGenerator)
         {
             _pagedAlbumCollectionGenerator = pagedAlbumCollectionGenerator;
-            _container = new UnityContainer();
-            _container.RegisterType<IPagedAlbumCollectionGenerator, PagedAlbumCollectionGenerator>();
+           
         }
 
         [HttpGet]

@@ -4,7 +4,7 @@ using ImageMege.Models;
 
 namespace ImageMege
 {
-    public class ImageMerger
+    public class ImageMerger : IImageMerger
     {
         public IEnumerable<Album> Merge(IEnumerable<ImageJson> imageCollection, IEnumerable<AlbumJson> albumCollection)
         {

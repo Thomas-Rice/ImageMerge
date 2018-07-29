@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using ImageMege.Controllers;
 using ImageMege.Models;
 
 namespace ImageMege
@@ -10,15 +9,16 @@ namespace ImageMege
     {
         private const string ImagesUrl = "http://jsonplaceholder.typicode.com/photos";
         private const string AlbumsUrl = "http://jsonplaceholder.typicode.com/albums";
-        private readonly ImageMerger _imageMerger;
+
+        private readonly IImageMerger _imageMerger;
         private readonly DataDownloader _dataDownloader;
         private readonly ImageRepo _imageRepo;
         private readonly WebClient _webClient;
 
-        public PagedAlbumCollectionGenerator()
+        public PagedAlbumCollectionGenerator(IImageMerger imageMerger)
         {
             _dataDownloader = new DataDownloader();
-            _imageMerger = new ImageMerger();
+            _imageMerger = imageMerger;
             _webClient = new WebClient();
             _imageRepo = new ImageRepo();
         }
