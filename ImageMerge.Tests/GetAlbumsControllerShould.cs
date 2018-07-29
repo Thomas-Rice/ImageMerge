@@ -5,6 +5,7 @@ using ImageMege.Controllers;
 using ImageMege.Models;
 using Moq;
 using NUnit.Framework;
+using Shouldly;
 
 namespace ImageMerge.Tests
 {
@@ -12,7 +13,8 @@ namespace ImageMerge.Tests
     {
         private MergeController _controller;
         private Mock<IPagedAlbumCollectionGenerator> _mockPagedAlbumCollectionGenerator;
-
+        private List<ImageJson> _multipleImages;
+        private List<AlbumJson> _album;
 
         [SetUp]
         public void BeforeEachTest()
@@ -22,14 +24,23 @@ namespace ImageMerge.Tests
         }
 
         [Test]
-        public void Returns200OnValidRequest()
+        public void ReturnsContentOnValidRequest()
         {
-            var result = _controller.GetAlbums(1,1);
+            _mockPagedAlbumCollectionGenerator.Setup(x => x.Generate(1,1)).Returns(new List<Album>{new Album(){AlbumId = 1}});
+            var result = _controller.GetAlbums(1, 1);
 
             var contentResult = result as OkNegotiatedContentResult<List<Album>>;
 
-            Assert.IsNotNull(contentResult);
-            Assert.IsNotNull(contentResult.Content);
+            contentResult.ShouldNotBeNull();
+            contentResult.Content.ShouldNotBeNull();
+        }
+
+        [Test]
+        public void CallsPagedAlbumCollectionGenerator()
+        {
+            _controller.GetAlbums(1, 1);
+
+            _mockPagedAlbumCollectionGenerator.Verify(x => x.Generate(1,1), Times.Once);
         }
     }
 }

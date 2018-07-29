@@ -17,7 +17,8 @@ namespace ImageMerge.Specs
         private List<AlbumJson> _album;
         private Mock<IImageRepo> _imageRepo;
 
-        public void Setup()
+        [Given(@"Given Configurations Are SetUp")]
+        public void GivenConfigurationsAreSetUp()
         {
             _imageMerger = new Mock<IImageMerger>();
             _imageRepo = new Mock<IImageRepo>();

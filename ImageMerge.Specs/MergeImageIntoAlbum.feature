@@ -3,6 +3,8 @@
 	As a consumer of the service
 	I want to be shown what album the image is in
 
+Background: 
+	Given Given Configurations Are SetUp
 
 Scenario: Merge image into album
 	Given I have the following image

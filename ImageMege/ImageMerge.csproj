@@ -117,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IImageMerger.cs" />
+    <Compile Include="IImageRepo.cs" />
     <Compile Include="IPagedAlbumCollectionGenerator.cs" />
     <Compile Include="PagedAlbumCollectionGenerator.cs" />
     <Compile Include="DataDownloader.cs" />

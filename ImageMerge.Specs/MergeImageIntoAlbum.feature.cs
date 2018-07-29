@@ -64,13 +64,23 @@ namespace ImageMerge.Specs
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 6
+#line 7
+ testRunner.Given("Given Configurations Are SetUp", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+        }
+        
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Merge image into album")]
         public virtual void MergeImageIntoAlbum()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Merge image into album", ((string[])(null)));
-#line 7
+#line 9
 this.ScenarioSetup(scenarioInfo);
+#line 6
+this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "albumID",
@@ -84,7 +94,7 @@ this.ScenarioSetup(scenarioInfo);
                         "TestTitle",
                         "http://placehold.it/600/92c952",
                         "http://placehold.it/150/92c952"});
-#line 8
+#line 10
  testRunner.Given("I have the following image", ((string)(null)), table1, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -95,9 +105,9 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "32",
                         "accusamus beatae ad facilis cum similique qui sunt"});
-#line 11
+#line 13
  testRunner.And("the following Album", ((string)(null)), table2, "And ");
-#line 14
+#line 16
  testRunner.When("When I call the merge operation asking for 1 page and 1 results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -116,7 +126,7 @@ this.ScenarioSetup(scenarioInfo);
                         "TestTitle",
                         "32",
                         "1"});
-#line 15
+#line 17
  testRunner.Then("the result should be the following album:", ((string)(null)), table3, "Then ");
 #line hidden
             this.ScenarioCleanup();

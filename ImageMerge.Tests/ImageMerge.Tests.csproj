@@ -79,6 +79,7 @@
     <Compile Include="GetAlbumsControllerShould.cs" />
     <Compile Include="ImageMergerShould.cs" />
     <Compile Include="ImageRepoShould.cs" />
+    <Compile Include="PagedAlbumCollectionGeneratorShould.cs" />
     <Compile Include="PagerShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

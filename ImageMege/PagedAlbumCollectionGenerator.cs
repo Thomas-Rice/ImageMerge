@@ -12,7 +12,7 @@ namespace ImageMege
 
         private readonly IImageMerger _imageMerger;
         private readonly DataDownloader _dataDownloader;
-        private readonly ImageRepo _imageRepo;
+        private readonly IImageRepo _imageRepo;
         private readonly WebClient _webClient;
 
         public PagedAlbumCollectionGenerator(IImageMerger imageMerger, IImageRepo imageRepo)
@@ -47,10 +47,5 @@ namespace ImageMege
                 };
 
         }
-    }
-
-    public interface IImageRepo
-    {
-        IEnumerable<T> Consume<T>(string data);
     }
 }
