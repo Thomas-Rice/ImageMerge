@@ -123,14 +123,6 @@ namespace ImageMerge.Tests
         }
 
         [Test]
-        public void ReturnAlbumCollection()
-        {
-            var result = _imageMerger.Merge(_image, _album);
-
-            result.ShouldBeOfType<List<Album>>();
-        }
-
-        [Test]
         public void MergeAllImagesAndAlbumData()
         {
             var result = _imageMerger.Merge(_image, _album);

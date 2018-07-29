@@ -6,12 +6,12 @@
 
 Scenario: Merge image into album
 	Given I have the following image
-	| albumID | id | title                                              | url                            | thumbnailUrl                   |
-	| 1       | 1  | accusamus beatae ad facilis cum similique qui sunt | http://placehold.it/600/92c952 | http://placehold.it/150/92c952 |
+	| albumID | id | title     | url                            | thumbnailUrl                   |
+	| 32      | 1  | TestTitle | http://placehold.it/600/92c952 | http://placehold.it/150/92c952 |
 	And the following Album
 	| userId | id | title                                              |
-	| 1      | 1  | accusamus beatae ad facilis cum similique qui sunt |
-	When When I call the merge operation
+	| 1      | 32 | accusamus beatae ad facilis cum similique qui sunt |
+	When When I call the merge operation asking for 1 page and 1 results
 	Then the result should be the following album:
-	| userId | id | title                                              | thumbnailUrl                   | fullImageUrl                   |
-	| 1      | 1  | accusamus beatae ad facilis cum similique qui sunt | http://placehold.it/150/92c952 | http://placehold.it/600/92c952 |
+	| UserId | PhotoTitle | ThumbnailUrl                   | FullImageUrl                   | AlbumTitle | AlbumId | PhotoId |
+	| 1      | TestTitle  | http://placehold.it/150/92c952 | http://placehold.it/600/92c952 | TestTitle  | 32      | 1       |

@@ -1,6 +1,8 @@
-﻿using ImageMege.Controllers;
+﻿using System.Collections.Generic;
+using System.Web.Http.Results;
+using ImageMege.Controllers;
+using ImageMege.Models;
 using NUnit.Framework;
-using Shouldly;
 
 namespace ImageMerge.Tests
 {
@@ -11,33 +13,21 @@ namespace ImageMerge.Tests
         [SetUp]
         public void BeforeEachTest()
         {
-            //_mockWebClient = new Mock<IWebClient>();
             _controller = new MergeController();
         }
 
         [Test]
-        public void ReturnsAJsonString()
+        public void Returns200OnValidRequest()
         {
-            var result = _controller.GetAlbums();
+            var result = _controller.GetAlbums(1,1);
 
-            result.ShouldBeOfType<string>();
+
+            var contentResult = result as OkNegotiatedContentResult<List<Album>>;
+
+            // Assert
+            Assert.IsNotNull(contentResult);
+            Assert.IsNotNull(contentResult.Content);
+            //Assert.AreEqual(42, contentResult.Content.Id);
         }
-
-        //[Test]
-        //public void CallsWebClient()
-        //{
-        //    _controller.GetAlbums();
-
-        //    _mockWebClient.Verify(x=> x.DownloadString(It.IsAny<string>()), Times.Once);
-        //}
-
-        //[Test]
-        //public void CallImageRepo()
-        //{
-        //    var result = _controller.GetAlbums();
-
-        //    _mockImageMerger.Verify(x => x.Merge(), Times.Once);
-
-        //}
     }
 }

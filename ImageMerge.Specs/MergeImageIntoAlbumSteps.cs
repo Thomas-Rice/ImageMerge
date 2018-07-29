@@ -1,4 +1,6 @@
-﻿using ImageMege.Models;
+﻿using System.Collections.Generic;
+using ImageMege;
+using ImageMege.Models;
 using Shouldly;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -8,28 +10,25 @@ namespace ImageMerge.Specs
     [Binding]
     public class MergeImageIntoAlbumSteps
     {
-        private Album _result;
-        private ImageJson _image;
-        private AlbumJson _album;
+        private List<Album> _result;
 
         [Given(@"I have the following image")]
         public void GivenIHaveTheFollowingImage(Table table)
         {
-            _image = table.CreateInstance<ImageJson>();
+            table.CreateInstance<ImageJson>();
         }
         
         [Given(@"the following Album")]
         public void GivenTheFollowingAlbum(Table table)
         {
-            _album = table.CreateInstance<AlbumJson>();
+            table.CreateInstance<AlbumJson>();
         }
-        
-        [When(@"When I call the merge operation")]
-        public void WhenWhenICallTheMergeOperation()
+
+        [When(@"When I call the merge operation asking for (.*) page and (.*) results")]
+        public void WhenWhenICallTheMergeOperationAskingForPageAndResults(int pageNumber, int numberOfObjects)
         {
-            //var imageMerge = new ImageMege();
-            //_result = ImageMege.CreateAlbum(_image, _album);
-            return;
+            var albumCollectionGenerator = new PagedAlbumCollectionGenerator();
+            _result = albumCollectionGenerator.Generate(pageNumber, numberOfObjects);
         }
         
         [Then(@"the result should be the following album:")]
@@ -37,11 +36,17 @@ namespace ImageMerge.Specs
         {
             var reference = table.CreateInstance<Album>();
 
-            _result.FullImageUrl.ShouldBe(reference.FullImageUrl); 
-            _result.PhotoId.ShouldBe(reference.PhotoId); 
-            _result.ThumbnailUrl.ShouldBe(reference.ThumbnailUrl); 
-            _result.PhotoTitle.ShouldBe(reference.PhotoTitle); 
-            _result.UserId.ShouldBe(reference.UserId); 
+            foreach (var album in _result)
+            {
+                album.AlbumId.ShouldBe(reference.AlbumId);
+                album.AlbumTitle.ShouldBe(reference.AlbumTitle);
+                album.FullImageUrl.ShouldBe(reference.FullImageUrl); 
+                album.PhotoId.ShouldBe(reference.PhotoId); 
+                album.ThumbnailUrl.ShouldBe(reference.ThumbnailUrl); 
+                album.PhotoTitle.ShouldBe(reference.PhotoTitle); 
+                album.UserId.ShouldBe(reference.UserId);
+            }
+
         }
     }
 }

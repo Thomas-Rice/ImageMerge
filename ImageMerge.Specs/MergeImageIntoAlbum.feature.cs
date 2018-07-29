@@ -79,9 +79,9 @@ this.ScenarioSetup(scenarioInfo);
                         "url",
                         "thumbnailUrl"});
             table1.AddRow(new string[] {
+                        "32",
                         "1",
-                        "1",
-                        "accusamus beatae ad facilis cum similique qui sunt",
+                        "TestTitle",
                         "http://placehold.it/600/92c952",
                         "http://placehold.it/150/92c952"});
 #line 8
@@ -93,25 +93,29 @@ this.ScenarioSetup(scenarioInfo);
                         "title"});
             table2.AddRow(new string[] {
                         "1",
-                        "1",
+                        "32",
                         "accusamus beatae ad facilis cum similique qui sunt"});
 #line 11
  testRunner.And("the following Album", ((string)(null)), table2, "And ");
 #line 14
- testRunner.When("When I call the merge operation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("When I call the merge operation asking for 1 page and 1 results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
-                        "userId",
-                        "id",
-                        "title",
-                        "thumbnailUrl",
-                        "fullImageUrl"});
+                        "UserId",
+                        "PhotoTitle",
+                        "ThumbnailUrl",
+                        "FullImageUrl",
+                        "AlbumTitle",
+                        "AlbumId",
+                        "PhotoId"});
             table3.AddRow(new string[] {
                         "1",
-                        "1",
-                        "accusamus beatae ad facilis cum similique qui sunt",
+                        "TestTitle",
                         "http://placehold.it/150/92c952",
-                        "http://placehold.it/600/92c952"});
+                        "http://placehold.it/600/92c952",
+                        "TestTitle",
+                        "32",
+                        "1"});
 #line 15
  testRunner.Then("the result should be the following album:", ((string)(null)), table3, "Then ");
 #line hidden
