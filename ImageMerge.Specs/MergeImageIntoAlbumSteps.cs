@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using ImageMege;
 using ImageMege.Models;
+using ImageMege.Services;
 using Moq;
 using Shouldly;
 using TechTalk.SpecFlow;

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ImageMege.Services;
 using Newtonsoft.Json;
 
 namespace ImageMege

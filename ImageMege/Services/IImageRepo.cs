@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace ImageMege
+namespace ImageMege.Services
 {
     public interface IImageRepo
     {

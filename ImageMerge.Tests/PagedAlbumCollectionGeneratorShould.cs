@@ -2,6 +2,7 @@
 using System.Linq;
 using ImageMege;
 using ImageMege.Models;
+using ImageMege.Services;
 using Moq;
 using NUnit.Framework;
 using Shouldly;

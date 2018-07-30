@@ -116,10 +116,10 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IImageMerger.cs" />
-    <Compile Include="IImageRepo.cs" />
-    <Compile Include="IPagedAlbumCollectionGenerator.cs" />
-    <Compile Include="IWebClient.cs" />
+    <Compile Include="Services\IImageMerger.cs" />
+    <Compile Include="Services\IImageRepo.cs" />
+    <Compile Include="Services\IPagedAlbumCollectionGenerator.cs" />
+    <Compile Include="Services\IWebClient.cs" />
     <Compile Include="PagedAlbumCollectionGenerator.cs" />
     <Compile Include="ImageRepo.cs" />
     <Compile Include="ImageMerger.cs" />

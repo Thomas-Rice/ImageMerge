@@ -1,12 +1,7 @@
 using System.Net;
 
-namespace ImageMege
+namespace ImageMege.Services
 {
-    public interface IWebClient
-    {
-        string DownloadString(string url);
-    }
-
     public class WebClientWrapper : IWebClient
     {
         private readonly WebClient _webClient;
@@ -21,6 +16,4 @@ namespace ImageMege
             return _webClient.DownloadString(url);
         }
     }
-
-
 }

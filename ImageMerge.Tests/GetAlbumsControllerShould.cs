@@ -3,6 +3,7 @@ using System.Web.Http.Results;
 using ImageMege;
 using ImageMege.Controllers;
 using ImageMege.Models;
+using ImageMege.Services;
 using Moq;
 using NUnit.Framework;
 using Shouldly;

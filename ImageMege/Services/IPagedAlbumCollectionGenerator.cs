@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ImageMege.Models;
 
-namespace ImageMege
+namespace ImageMege.Services
 {
     public interface IPagedAlbumCollectionGenerator
     {

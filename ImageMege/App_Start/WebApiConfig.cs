@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using ImageMege.Services;
 using Unity;
 using Unity.Lifetime;
 

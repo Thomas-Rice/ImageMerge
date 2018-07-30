@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Web.Http;
+using ImageMege.Services;
 using Swashbuckle.Swagger.Annotations;
 
 namespace ImageMege.Controllers
