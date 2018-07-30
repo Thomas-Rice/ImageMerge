@@ -16,12 +16,14 @@ namespace ImageMerge.Specs
         private List<ImageJson> _image;
         private List<AlbumJson> _album;
         private Mock<IImageRepo> _imageRepo;
+        private Mock<IDataDownloader> _dataDownloader;
 
         [Given(@"Given Configurations Are SetUp")]
         public void GivenConfigurationsAreSetUp()
         {
             _imageMerger = new Mock<IImageMerger>();
             _imageRepo = new Mock<IImageRepo>();
+            _dataDownloader = new Mock<IDataDownloader>();
         }
 
         [Given(@"I have the following image")]

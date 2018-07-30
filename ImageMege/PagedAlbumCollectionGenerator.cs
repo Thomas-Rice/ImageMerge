@@ -11,16 +11,14 @@ namespace ImageMege
         private const string AlbumsUrl = "http://jsonplaceholder.typicode.com/albums";
 
         private readonly IImageMerger _imageMerger;
-        private readonly DataDownloader _dataDownloader;
         private readonly IImageRepo _imageRepo;
-        private readonly WebClient _webClient;
+        private readonly IWebClient _webClient;
 
-        public PagedAlbumCollectionGenerator(IImageMerger imageMerger, IImageRepo imageRepo)
+        public PagedAlbumCollectionGenerator(IImageMerger imageMerger, IImageRepo imageRepo, IWebClient webClient)
         {
-            _dataDownloader = new DataDownloader();
             _imageMerger = imageMerger;
-            _webClient = new WebClient();
             _imageRepo = imageRepo;
+            _webClient = webClient;
         }
 
         public List<Album> Generate(int pageNumber, int numberOfObjectsPerPage)
@@ -30,10 +28,10 @@ namespace ImageMege
             var image = _imageRepo.Consume<ImageJson>(imageAndAlbumData["Images"]);
             var album = _imageRepo.Consume<AlbumJson>(imageAndAlbumData["Albums"]);
 
-            var mergedAlbumCollection = _imageMerger.Merge(image, album).ToList();
+            if (!image.Any() || !album.Any()) return null;
 
-            var pagedAlbumCollection = Pager.Page(mergedAlbumCollection, pageNumber, numberOfObjectsPerPage).ToList();
-            return pagedAlbumCollection;
+            var mergedAlbumCollection = _imageMerger.Merge(image, album).ToList();
+            return Pager.Page(mergedAlbumCollection, pageNumber, numberOfObjectsPerPage).ToList();
         }
 
         private Dictionary<string, string> GetImageAndAlbumData()
@@ -41,9 +39,8 @@ namespace ImageMege
             return
                 new Dictionary<string, string>
                 {
-                    {"Images", _dataDownloader.DownloadDataFromUrl(ImagesUrl, _webClient)},
-                    {"Albums", _dataDownloader.DownloadDataFromUrl(AlbumsUrl, _webClient)}
-
+                    {"Images", _webClient.DownloadString(ImagesUrl)},
+                    {"Albums", _webClient.DownloadString(AlbumsUrl)}
                 };
 
         }

@@ -20,7 +20,7 @@ namespace ImageMege.Controllers
         {
             var pagedAlbumCollection = _pagedAlbumCollectionGenerator.Generate(pageNumber, numberOfObjectsPerPage);
 
-            if (!ModelState.IsValid)
+            if (pagedAlbumCollection == null)
                 return Content(HttpStatusCode.NoContent, ModelState);
 
             return Ok(pagedAlbumCollection);
