@@ -104,7 +104,7 @@ this.FeatureBackground();
             table2.AddRow(new string[] {
                         "1",
                         "32",
-                        "accusamus beatae ad facilis cum similique qui sunt"});
+                        "TestTitle"});
 #line 13
  testRunner.And("the following Album", ((string)(null)), table2, "And ");
 #line 16

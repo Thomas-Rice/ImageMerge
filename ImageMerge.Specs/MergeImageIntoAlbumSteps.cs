@@ -12,38 +12,47 @@ namespace ImageMerge.Specs
     public class MergeImageIntoAlbumSteps
     {
         private List<Album> _result;
-        private Mock<IImageMerger> _imageMerger;
-        private List<ImageJson> _image;
-        private List<AlbumJson> _album;
+        private IImageMerger _imageMerger;
+        private List<ImageJson> _imageCollection;
+        private List<AlbumJson> _albumCollection;
         private Mock<IImageRepo> _imageRepo;
-        private Mock<IDataDownloader> _dataDownloader;
+        private Mock<IWebClient> _webClient;
 
         [Given(@"Given Configurations Are SetUp")]
         public void GivenConfigurationsAreSetUp()
         {
-            _imageMerger = new Mock<IImageMerger>();
+            _imageMerger = new ImageMerger();
             _imageRepo = new Mock<IImageRepo>();
-            _dataDownloader = new Mock<IDataDownloader>();
+            _webClient = new Mock<IWebClient>();
+
+            _imageCollection = new List<ImageJson>();
+            _albumCollection = new List<AlbumJson>();
         }
 
         [Given(@"I have the following image")]
         public void GivenIHaveTheFollowingImage(Table table)
         {
-            _image = table.CreateInstance<List<ImageJson>>();
+            var image = table.CreateInstance<ImageJson>();
+            _imageCollection.Add(image);
         }
         
         [Given(@"the following Album")]
         public void GivenTheFollowingAlbum(Table table)
         {
-            _album = table.CreateInstance<List<AlbumJson>>();
+            var album = table.CreateInstance<AlbumJson>();
+            _albumCollection.Add(album);
         }
 
         [When(@"When I call the merge operation asking for (.*) page and (.*) results")]
         public void WhenWhenICallTheMergeOperationAskingForPageAndResults(int pageNumber, int numberOfObjects)
         {
-            _imageRepo.Setup(x => x.Consume<ImageJson>(It.IsAny<string>())).Returns(_image);
-            _imageRepo.Setup(x => x.Consume<AlbumJson>(It.IsAny<string>())).Returns(_album);
-            var albumCollectionGenerator = new PagedAlbumCollectionGenerator(_imageMerger.Object, _imageRepo.Object);
+            //_webClient.Setup(x => x.DownloadString("TestImageString")).Returns(_imageData);
+            //_webClient.Setup(x => x.DownloadString(AlbumsUrl)).Returns(_albumData);
+
+            _imageRepo.Setup(x => x.Consume<ImageJson>(It.IsAny<string>())).Returns(_imageCollection);
+            _imageRepo.Setup(x => x.Consume<AlbumJson>(It.IsAny<string>())).Returns(_albumCollection);
+
+            var albumCollectionGenerator = new PagedAlbumCollectionGenerator(_imageMerger, _imageRepo.Object, _webClient.Object);
             _result = albumCollectionGenerator.Generate(pageNumber, numberOfObjects);
         }
         

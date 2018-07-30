@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using ImageMege.Models;
 
 namespace ImageMege
@@ -25,8 +24,8 @@ namespace ImageMege
         {
             var imageAndAlbumData = GetImageAndAlbumData();
 
-            var image = _imageRepo.Consume<ImageJson>(imageAndAlbumData["Images"]);
-            var album = _imageRepo.Consume<AlbumJson>(imageAndAlbumData["Albums"]);
+            var image = _imageRepo.Consume<ImageJson>(imageAndAlbumData["Images"]).ToList();
+            var album = _imageRepo.Consume<AlbumJson>(imageAndAlbumData["Albums"]).ToList();
 
             if (!image.Any() || !album.Any()) return null;
 
@@ -39,8 +38,8 @@ namespace ImageMege
             return
                 new Dictionary<string, string>
                 {
-                    {"Images", _webClient.DownloadString(ImagesUrl)},
-                    {"Albums", _webClient.DownloadString(AlbumsUrl)}
+                    {"Images", _webClient.DownloadString(ImagesUrl) ?? ""},
+                    {"Albums", _webClient.DownloadString(AlbumsUrl)?? ""}
                 };
 
         }

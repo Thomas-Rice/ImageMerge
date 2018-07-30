@@ -11,8 +11,8 @@ Scenario: Merge image into album
 	| albumID | id | title     | url                            | thumbnailUrl                   |
 	| 32      | 1  | TestTitle | http://placehold.it/600/92c952 | http://placehold.it/150/92c952 |
 	And the following Album
-	| userId | id | title                                              |
-	| 1      | 32 | accusamus beatae ad facilis cum similique qui sunt |
+	| userId | id | title     |
+	| 1      | 32 | TestTitle |
 	When When I call the merge operation asking for 1 page and 1 results
 	Then the result should be the following album:
 	| UserId | PhotoTitle | ThumbnailUrl                   | FullImageUrl                   | AlbumTitle | AlbumId | PhotoId |

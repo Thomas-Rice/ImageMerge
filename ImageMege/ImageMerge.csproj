@@ -116,7 +116,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IDataDownloader.cs" />
     <Compile Include="IImageMerger.cs" />
     <Compile Include="IImageRepo.cs" />
     <Compile Include="IPagedAlbumCollectionGenerator.cs" />
