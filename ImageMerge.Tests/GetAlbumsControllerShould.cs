@@ -13,8 +13,6 @@ namespace ImageMerge.Tests
     {
         private MergeController _controller;
         private Mock<IPagedAlbumCollectionGenerator> _mockPagedAlbumCollectionGenerator;
-        private List<ImageJson> _multipleImages;
-        private List<AlbumJson> _album;
 
         [SetUp]
         public void BeforeEachTest()
@@ -27,8 +25,8 @@ namespace ImageMerge.Tests
         public void ReturnsContentOnValidRequest()
         {
             _mockPagedAlbumCollectionGenerator.Setup(x => x.Generate(1,1)).Returns(new List<Album>{new Album(){AlbumId = 1}});
-            var result = _controller.GetAlbums(1, 1);
 
+            var result = _controller.GetAlbums(1, 1);
             var contentResult = result as OkNegotiatedContentResult<List<Album>>;
 
             contentResult.ShouldNotBeNull();

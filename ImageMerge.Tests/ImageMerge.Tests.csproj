@@ -75,7 +75,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataDownloaderShould.cs" />
     <Compile Include="GetAlbumsControllerShould.cs" />
     <Compile Include="ImageMergerShould.cs" />
     <Compile Include="ImageRepoShould.cs" />

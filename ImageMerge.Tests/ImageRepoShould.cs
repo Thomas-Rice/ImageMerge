@@ -53,7 +53,7 @@ namespace ImageMerge.Tests
         {
             var result = _imageRepo.Consume<ImageJson>(_imageData).FirstOrDefault();
 
-
+            if (result == null) return;
             result.albumId.ShouldBe(_resultImage.albumId);
             result.id.ShouldBe(_resultImage.id);
             result.thumbnailUrl.ShouldBe(_resultImage.thumbnailUrl);
@@ -74,9 +74,18 @@ namespace ImageMerge.Tests
         {
             var result = _imageRepo.Consume<AlbumJson>(_albumData).FirstOrDefault();
 
+            if (result == null) return;
             result.id.ShouldBe(_resultAlbum.id);
             result.title.ShouldBe(_resultAlbum.title);
             result.userId.ShouldBe(_resultAlbum.userId);
+        }
+
+        [Test]
+        public void ReturnEmptyListIfInputIsEmpty()
+        {
+            var result = _imageRepo.Consume<AlbumJson>("");
+
+            result.Count().ShouldBe(0);
         }
 
 

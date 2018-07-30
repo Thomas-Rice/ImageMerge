@@ -17,3 +17,18 @@ Scenario: Merge image into album
 	Then the result should be the following album:
 	| UserId | PhotoTitle | ThumbnailUrl                   | FullImageUrl                   | AlbumTitle | AlbumId | PhotoId |
 	| 1      | TestTitle  | http://placehold.it/150/92c952 | http://placehold.it/600/92c952 | TestTitle  | 32      | 1       |
+
+
+Scenario: Merge Multiple image into album
+	Given I have the following image
+	| albumID | id | title      | url                             | thumbnailUrl                    |
+	| 32      | 1  | TestTitle  | http://placehold.it/600/92c952  | http://placehold.it/150/92c952  |
+	| 32      | 2  | TestTitle2 | http://placehold.it/600/92c9522 | http://placehold.it/150/92c9522 |
+	And the following Album
+	| userId | id | title     |
+	| 1      | 32 | TestTitle |
+	When When I call the merge operation asking for 1 page and 1 results
+	Then the result should be the following album:
+	| UserId | PhotoTitle | ThumbnailUrl                   | FullImageUrl                   | AlbumTitle | AlbumId | PhotoId |
+	| 1      | TestTitle  | http://placehold.it/150/92c952 | http://placehold.it/600/92c952 | TestTitle  | 32      | 1       |
+	| 1      | TestTitle2 | http://placehold.it/150/92c952 | http://placehold.it/600/92c952 | TestTitle  | 32      | 3       |

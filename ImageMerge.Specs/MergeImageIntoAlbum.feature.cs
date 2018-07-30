@@ -131,6 +131,80 @@ this.FeatureBackground();
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Merge Multiple image into album")]
+        public virtual void MergeMultipleImageIntoAlbum()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Merge Multiple image into album", ((string[])(null)));
+#line 22
+this.ScenarioSetup(scenarioInfo);
+#line 6
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "albumID",
+                        "id",
+                        "title",
+                        "url",
+                        "thumbnailUrl"});
+            table4.AddRow(new string[] {
+                        "32",
+                        "1",
+                        "TestTitle",
+                        "http://placehold.it/600/92c952",
+                        "http://placehold.it/150/92c952"});
+            table4.AddRow(new string[] {
+                        "32",
+                        "2",
+                        "TestTitle2",
+                        "http://placehold.it/600/92c9522",
+                        "http://placehold.it/150/92c9522"});
+#line 23
+ testRunner.Given("I have the following image", ((string)(null)), table4, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "userId",
+                        "id",
+                        "title"});
+            table5.AddRow(new string[] {
+                        "1",
+                        "32",
+                        "TestTitle"});
+#line 27
+ testRunner.And("the following Album", ((string)(null)), table5, "And ");
+#line 30
+ testRunner.When("When I call the merge operation asking for 1 page and 1 results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "UserId",
+                        "PhotoTitle",
+                        "ThumbnailUrl",
+                        "FullImageUrl",
+                        "AlbumTitle",
+                        "AlbumId",
+                        "PhotoId"});
+            table6.AddRow(new string[] {
+                        "1",
+                        "TestTitle",
+                        "http://placehold.it/150/92c952",
+                        "http://placehold.it/600/92c952",
+                        "TestTitle",
+                        "32",
+                        "1"});
+            table6.AddRow(new string[] {
+                        "1",
+                        "TestTitle2",
+                        "http://placehold.it/150/92c952",
+                        "http://placehold.it/600/92c952",
+                        "TestTitle",
+                        "32",
+                        "3"});
+#line 31
+ testRunner.Then("the result should be the following album:", ((string)(null)), table6, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

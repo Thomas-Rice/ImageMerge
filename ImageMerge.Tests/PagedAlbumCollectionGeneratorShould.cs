@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using ImageMege;
 using ImageMege.Models;
 using Moq;
@@ -12,12 +11,8 @@ namespace ImageMerge.Tests
     public class PagedAlbumCollectionGeneratorShould
     {
         private PagedAlbumCollectionGenerator _pagedAlbumCollectionGenerator;
-        private Mock<IImageRepo> _imageRepo;
-        private Mock<IImageMerger> _imageMerger;
         private Mock<IWebClient> _webClient;
 
-        private List<AlbumJson> _album;
-        private List<ImageJson> _image;
         private List<Album> _expectedResultForMultiple;
         private const string ImagesUrl = "http://jsonplaceholder.typicode.com/photos";
         private const string AlbumsUrl = "http://jsonplaceholder.typicode.com/albums";
@@ -27,13 +22,8 @@ namespace ImageMerge.Tests
         [SetUp]
         public void BeforeEachTest()
         {
-            _imageRepo = new Mock<IImageRepo>();
-            _imageMerger = new Mock<IImageMerger>();
             _webClient = new Mock<IWebClient>();
             _pagedAlbumCollectionGenerator = new PagedAlbumCollectionGenerator(new ImageMerger(), new ImageRepo(), _webClient.Object);
-
-            _image = new List<ImageJson>();
-            _album = new List<AlbumJson>();
 
             _expectedResultForMultiple = new List<Album>
             {
@@ -78,6 +68,8 @@ namespace ImageMerge.Tests
                     UserId = 1
                 }
             };
+
+
         }
 
         [TestCase(1,1,1)]
@@ -85,6 +77,9 @@ namespace ImageMerge.Tests
         [TestCase(1,2,2)]
         public void ReturnASpecifiedAmountOfObjects(int pageNumber, int numberOfObjectsPerPage, int numberOfResults)
         {
+            _webClient.Setup(x => x.DownloadString(ImagesUrl)).Returns(_imageData);
+            _webClient.Setup(x => x.DownloadString(AlbumsUrl)).Returns(_albumData);
+
             var result = _pagedAlbumCollectionGenerator.Generate(pageNumber, numberOfObjectsPerPage);
 
             result.Count.ShouldBe(numberOfResults);
@@ -111,8 +106,8 @@ namespace ImageMerge.Tests
         [Test]
         public void ReturnNullIfAlbumOrImageAreEmpty()
         {
-            _imageRepo.Setup(y => y.Consume<ImageJson>(It.IsAny<string>())).Returns(new List<ImageJson>());
-            _imageRepo.Setup(y => y.Consume<AlbumJson>(It.IsAny<string>())).Returns(new List<AlbumJson>());
+            _webClient.Setup(x => x.DownloadString(ImagesUrl)).Returns("");
+            _webClient.Setup(x => x.DownloadString(AlbumsUrl)).Returns("");
 
             var result = _pagedAlbumCollectionGenerator.Generate(1, 1);
 

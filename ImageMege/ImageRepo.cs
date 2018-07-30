@@ -7,7 +7,7 @@ namespace ImageMege
     {
         public IEnumerable<T> Consume<T>(string data)
         {
-            return JsonConvert.DeserializeObject<IEnumerable<T>>(data);
+            return data != "" ? JsonConvert.DeserializeObject<IEnumerable<T>>(data) : new List<T>();
         }
     }
 }
